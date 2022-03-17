@@ -62,6 +62,15 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/Kati.svg
+    - images/cross.svg
+    - images/Cross_a.svg
+    - images/Leaderboard.svg
+    - images/Refresh.svg
+    - images/win.svg
+    - images/zero_g.svg
+    - images/zeroo.svg
+    
+
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
