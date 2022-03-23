@@ -69,6 +69,10 @@ flutter:
     - images/win.svg
     - images/zero_g.svg
     - images/zeroo.svg
+    - images/Leader_board_button.svg
+    - images/reset.svg
+    - images/return.svg
+
     
 
     
