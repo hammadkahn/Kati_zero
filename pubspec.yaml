@@ -72,6 +72,9 @@ flutter:
     - images/Leader_board_button.svg
     - images/reset.svg
     - images/return.svg
+    - images/c_l.svg
+    - images/o_l.svg
+    - images/trophy.svg
 
     
 
