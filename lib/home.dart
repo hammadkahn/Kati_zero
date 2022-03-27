@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:myapp/extra_home.dart';
 import 'package:myapp/leaderboard.dart';
 import 'package:myapp/winning.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var boxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  String img = '';
+  List<int> lst = [];
+  var a;
 
   @override
   Widget build(BuildContext context) {
@@ -60,63 +71,7 @@ class HomeScreen extends StatelessWidget {
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 76),
-            child: Container(
-              height: 415,
-              width: 364,
-              // color: const Color(0xFFC5C5C5),
-              decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xFFC5C5C5),
-                  shape: BoxShape.circle),
-              child: Column(
-                children: [
-                  SizedBox(
-                      child: Row(
-                        children: [
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                          Padding(padding: EdgeInsets.all(1)),
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                          Padding(padding: EdgeInsets.all(1)),
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                        ],
-                      ),
-                      height: 137),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: SizedBox(
-                      child: Row(
-                        children: [
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                          Padding(padding: EdgeInsets.all(1)),
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                          Padding(padding: EdgeInsets.all(1)),
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                        ],
-                      ),
-                      height: 137,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: SizedBox(
-                      child: Row(
-                        children: [
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                          Padding(padding: EdgeInsets.all(1)),
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                          Padding(padding: EdgeInsets.all(1)),
-                          Container(width: 120, color: Color(0xFFFFFFFF)),
-                        ],
-                      ),
-                      height: 137,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          Extrahome(),
           Padding(
             padding: const EdgeInsets.only(top: 60, left: 20),
             child: Row(
@@ -154,5 +109,13 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  statusCheck() {
+    if (img == 'images/z.png') {
+      img = 'images/c.png';
+    } else {
+      img = 'images/z.png';
+    }
   }
 }
