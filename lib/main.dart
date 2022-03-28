@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/extra_home.dart';
-import 'package:myapp/home.dart';
-import 'package:myapp/splash_screen.dart';
+
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Extrahome(),
     );
   }

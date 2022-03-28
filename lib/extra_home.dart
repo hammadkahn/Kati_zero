@@ -52,7 +52,7 @@ class _ExtrahomeState extends State<Extrahome> {
             Padding(padding: EdgeInsets.only(bottom: 11)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   "Player 1",
                   style: TextStyle(
@@ -98,36 +98,41 @@ class _ExtrahomeState extends State<Extrahome> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => LeaderBoard()));
-                  },
-                  child: SvgPicture.asset(
-                    'images/Leader_board_button.svg',
-                    width: 218,
-                    height: 62,
+            const SizedBox(height: 121),
+            Padding(
+              padding: const EdgeInsets.only(left: 23.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => LeaderBoard()));
+                    },
+                    child: SvgPicture.asset(
+                      'images/Leader_board_button.svg',
+                      width: 218,
+                      height: 62,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 90),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => HomeScreen()));
-                      },
-                      child: SvgPicture.asset(
-                        'images/reset.svg',
-                        width: 38.32,
-                        height: 40.78,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 90),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => HomeScreen()));
+                        },
+                        child: SvgPicture.asset(
+                          'images/reset.svg',
+                          width: 38.32,
+                          height: 40.78,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),
