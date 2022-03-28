@@ -13,9 +13,65 @@ class Extrahome extends StatefulWidget {
 }
 
 class _ExtrahomeState extends State<Extrahome> {
+  var img1;
+  var img2;
+  var img3;
+  var img4;
+  var img5;
+  var img6;
+  var img7;
+  var img8;
+  var img9;
+  var winner = "";
+  var lst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+  List<dynamic> pic = [Image.asset("images/c.png")];
+  var cross = Image.asset("images/c.png");
+  var zero = Image.asset("images/z.png");
+  var p = "X";
+  late String image;
+  void img(i) {
+    if (lst[i] == '-') {
+      setState(() {
+        lst[i] = p;
+        print(lst);
+        p = p == "X" ? "O" : "X";
+      });
+      findWinner(lst[i]);
+    }
+  }
+
+  void reset() {
+    setState(() {
+      var lst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+    });
+  }
+
+  bool checkMove(i1, i2, i3, sign) {
+    if (lst[i1] == sign && lst[i2] == sign && lst[i3] == sign) {
+      return true;
+    }
+    return false;
+  }
+
+  void findWinner(currentsign) {
+    if (checkMove(0, 1, 2, currentsign) ||
+            checkMove(3, 4, 5, currentsign) ||
+            checkMove(6, 7, 8, currentsign) || //rows
+            checkMove(0, 3, 6, currentsign) ||
+            checkMove(1, 4, 7, currentsign) ||
+            checkMove(2, 5, 8, currentsign) || //columns
+            checkMove(0, 4, 8, currentsign) ||
+            checkMove(2, 4, 6, currentsign) //diagonal
+
+        ) {
+      setState(() {
+        winner = currentsign;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var lst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
     return Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox.expand(
@@ -88,7 +144,7 @@ class _ExtrahomeState extends State<Extrahome> {
                     return Material(
                       color: Colors.white,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () => img(index),
                         child: Center(
                             child: Text(lst[index],
                                 style: TextStyle(fontSize: 30))),
@@ -98,7 +154,12 @@ class _ExtrahomeState extends State<Extrahome> {
                 ),
               ),
             ),
-            const SizedBox(height: 121),
+            if (winner != "")
+              Text(
+                '$winner won the game',
+                style: TextStyle(fontSize: 30),
+              ),
+            const SizedBox(height: 90),
             Padding(
               padding: const EdgeInsets.only(left: 23.0),
               child: Row(
@@ -121,7 +182,7 @@ class _ExtrahomeState extends State<Extrahome> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => HomeScreen()));
+                              MaterialPageRoute(builder: (_) => Extrahome()));
                         },
                         child: SvgPicture.asset(
                           'images/reset.svg',
