@@ -23,14 +23,14 @@ class _ExtrahomeState extends State<Extrahome> {
   var img8;
   var img9;
   var winner = "";
-  var lst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+  var lst = ["", "", "", "", "", "", "", "", ""];
   List<dynamic> pic = [Image.asset("images/c.png")];
   var cross = Image.asset("images/c.png");
   var zero = Image.asset("images/z.png");
   var p = "X";
   late String image;
   void img(i) {
-    if (lst[i] == '-') {
+    if (lst[i] == '') {
       setState(() {
         lst[i] = p;
         print(lst);
@@ -42,7 +42,9 @@ class _ExtrahomeState extends State<Extrahome> {
 
   void reset() {
     setState(() {
-      var lst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+      lst = ["", "", "", "", "", "", "", "", ""];
+      p = "X";
+      print(lst);
     });
   }
 
@@ -72,6 +74,10 @@ class _ExtrahomeState extends State<Extrahome> {
 
   @override
   Widget build(BuildContext context) {
+    double game_board_width = MediaQuery.of(context).size.width - 60 > 364
+        ? 364
+        : MediaQuery.of(context).size.width - 60;
+    double game_board_height = (415 / 364) * game_board_width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox.expand(
@@ -128,30 +134,46 @@ class _ExtrahomeState extends State<Extrahome> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 76, left: 30, right: 30),
-              child: Container(
-                constraints: BoxConstraints(maxWidth: 364),
-                color: Color(0xFFC5C5C5),
-                child: GridView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 364 / 415,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 2,
-                      mainAxisSpacing: 2),
-                  itemCount: lst.length,
-                  itemBuilder: (context, index) {
-                    return Material(
-                      color: Colors.white,
-                      child: InkWell(
-                        onTap: () => img(index),
-                        child: Center(
-                            child: Text(lst[index],
-                                style: TextStyle(fontSize: 30))),
-                      ),
-                    );
-                  },
-                ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: game_board_width,
+                    height: game_board_height,
+                    color: const Color(0xFFC5C5C5),
+                    child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: 364 / 415,
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 2,
+                              mainAxisSpacing: 2),
+                      itemCount: lst.length,
+                      itemBuilder: (context, index) {
+                        return Material(
+                          color: Colors.white,
+                          child: InkWell(
+                            onTap: () => img(index),
+                            child: Center(
+                                child: lst[index] == "X"
+                                    ? Image.asset('images/c.png')
+                                    : lst[index] == "O"
+                                        ? Image.asset('images/z.png')
+                                        : Text("")),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: game_board_height,
+                    width: game_board_width,
+                    // color: Colors.black,
+                    child: SvgPicture.asset('images/win.svg'),
+                  )
+                ],
               ),
             ),
             if (winner != "")
@@ -159,7 +181,7 @@ class _ExtrahomeState extends State<Extrahome> {
                 '$winner won the game',
                 style: TextStyle(fontSize: 30),
               ),
-            const SizedBox(height: 90),
+            const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.only(left: 23.0),
               child: Row(
@@ -181,8 +203,7 @@ class _ExtrahomeState extends State<Extrahome> {
                       padding: const EdgeInsets.only(left: 90),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => Extrahome()));
+                          reset();
                         },
                         child: SvgPicture.asset(
                           'images/reset.svg',
