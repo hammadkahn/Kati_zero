@@ -23,6 +23,7 @@ class _ExtrahomeState extends State<Extrahome> {
   var img8;
   var img9;
   var winner = "";
+  var win = SvgPicture.asset('images/win.svg');
   var lst = ["", "", "", "", "", "", "", "", ""];
   List<dynamic> pic = [Image.asset("images/c.png")];
   var cross = Image.asset("images/c.png");
@@ -44,6 +45,8 @@ class _ExtrahomeState extends State<Extrahome> {
     setState(() {
       lst = ["", "", "", "", "", "", "", "", ""];
       p = "X";
+      winner = "";
+      win;
       print(lst);
     });
   }
@@ -167,12 +170,11 @@ class _ExtrahomeState extends State<Extrahome> {
                       },
                     ),
                   ),
-                  Container(
-                    height: game_board_height,
-                    width: game_board_width,
-                    // color: Colors.black,
-                    child: SvgPicture.asset('images/win.svg'),
-                  )
+                  if (winner != "")
+                    Container(
+                        height: game_board_height,
+                        width: game_board_width,
+                        child: win)
                 ],
               ),
             ),
