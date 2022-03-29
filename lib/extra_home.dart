@@ -178,12 +178,7 @@ class _ExtrahomeState extends State<Extrahome> {
                 ],
               ),
             ),
-            if (winner != "")
-              Text(
-                '$winner won the game',
-                style: TextStyle(fontSize: 30),
-              ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 90),
             Padding(
               padding: const EdgeInsets.only(left: 23.0),
               child: Row(
