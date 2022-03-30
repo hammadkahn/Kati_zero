@@ -13,29 +13,21 @@ class Extrahome extends StatefulWidget {
 }
 
 class _ExtrahomeState extends State<Extrahome> {
-  var img1;
-  var img2;
-  var img3;
-  var img4;
-  var img5;
-  var img6;
-  var img7;
-  var img8;
-  var img9;
   var winner = "";
   var win = SvgPicture.asset('images/win.svg');
+  var winn = SvgPicture.asset('images/win_p2.svg');
   var lst = ["", "", "", "", "", "", "", "", ""];
   List<dynamic> pic = [Image.asset("images/c.png")];
   var cross = Image.asset("images/c.png");
   var zero = Image.asset("images/z.png");
-  var p = "X";
-  late String image;
+  var p = "O";
+  int a = 0;
   void img(i) {
     if (lst[i] == '') {
       setState(() {
         lst[i] = p;
         print(lst);
-        p = p == "X" ? "O" : "X";
+        p = p == "O" ? "X" : "O";
       });
       findWinner(lst[i]);
     }
@@ -44,7 +36,7 @@ class _ExtrahomeState extends State<Extrahome> {
   void reset() {
     setState(() {
       lst = ["", "", "", "", "", "", "", "", ""];
-      p = "X";
+      p = "O";
       winner = "";
       win;
       print(lst);
@@ -68,7 +60,12 @@ class _ExtrahomeState extends State<Extrahome> {
             checkMove(0, 4, 8, currentsign) ||
             checkMove(2, 4, 6, currentsign) //diagonal
 
-        ) {
+        )
+      ;
+    else
+      (a = 1);
+
+    {
       setState(() {
         winner = currentsign;
       });
@@ -160,10 +157,10 @@ class _ExtrahomeState extends State<Extrahome> {
                           child: InkWell(
                             onTap: () => img(index),
                             child: Center(
-                                child: lst[index] == "X"
-                                    ? Image.asset('images/c.png')
-                                    : lst[index] == "O"
-                                        ? Image.asset('images/z.png')
+                                child: lst[index] == "O"
+                                    ? Image.asset('images/z.png')
+                                    : lst[index] == "X"
+                                        ? Image.asset('images/c.png')
                                         : Text("")),
                           ),
                         );
@@ -174,7 +171,13 @@ class _ExtrahomeState extends State<Extrahome> {
                     Container(
                         height: game_board_height,
                         width: game_board_width,
-                        child: win)
+                        child: winner == "O"
+                            ? SvgPicture.asset('images/win.svg')
+                            : winner == "X"
+                                ? SvgPicture.asset('images/win_p2.svg')
+                                : a == 1
+                                    ? SvgPicture.asset('images/Draw.svg')
+                                    : SvgPicture.asset('images/Draw.svg')),
                 ],
               ),
             ),
