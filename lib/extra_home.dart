@@ -1,7 +1,6 @@
 import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:myapp/home.dart';
 
 import 'leaderboard.dart';
 
@@ -22,6 +21,7 @@ class _ExtrahomeState extends State<Extrahome> {
   var zero = Image.asset("images/z.png");
   var p = "O";
   int a = 0;
+  var winner_list = [];
   void img(i) {
     if (lst[i] == '') {
       setState(() {
@@ -60,14 +60,21 @@ class _ExtrahomeState extends State<Extrahome> {
             checkMove(0, 4, 8, currentsign) ||
             checkMove(2, 4, 6, currentsign) //diagonal
 
-        )
-      ;
-    else
+        ) {
+      setState(() {
+        winner = currentsign;
+        winner_list.add(winner);
+      });
+    } else
       () {
-        setState(() {
-          winner = currentsign;
-        });
+        if (!lst.contains("")) {
+          setState(() {
+            winner = "draw";
+          });
+        }
       };
+    print(winner_list);
+    print(winner);
   }
 
   @override

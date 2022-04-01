@@ -13,14 +13,14 @@ class LeaderBoard extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 32, top: 60),
+            padding: const EdgeInsets.only(left: 32, top: 60),
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SvgPicture.asset('images/return.svg'),
                 Padding(
                   padding: const EdgeInsets.only(left: 36),
-                  child: Column(children: [
+                  child: Column(children: const [
                     Text(
                       "L E A D E R",
                       style: TextStyle(
@@ -38,7 +38,7 @@ class LeaderBoard extends StatelessWidget {
               ],
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 56)),
+          const Padding(padding: EdgeInsets.only(top: 56)),
           WinBox_2(),
           WinBox_1()
         ],
