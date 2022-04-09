@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/extra_home.dart';
+import 'package:myapp/list.dart';
 import 'package:myapp/winbox_1.dart';
 import 'package:myapp/winbox_2.dart';
 
 class LeaderBoard extends StatelessWidget {
-  const LeaderBoard({Key? key}) : super(key: key);
+  final List<String> winnerRecords;
+  const LeaderBoard({required this.winnerRecords});
 
   @override
   Widget build(BuildContext context) {
+    print(winnerRecords);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -39,8 +43,16 @@ class LeaderBoard extends StatelessWidget {
             ),
           ),
           const Padding(padding: EdgeInsets.only(top: 56)),
-          WinBox_2(),
-          WinBox_1()
+          //loop for variable winner records
+          for (var i = 0; i < winnerRecords.length; i++)
+            //if i is even
+            if (winnerRecords[i] == "O")
+              WinBox_1()
+            //if i is odd
+            else if (winnerRecords[i] == "X")
+              WinBox_2()
+
+          //else
         ],
       ),
     );

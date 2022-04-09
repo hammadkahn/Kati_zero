@@ -1,6 +1,7 @@
 import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:myapp/list.dart';
 
 import 'leaderboard.dart';
 
@@ -21,7 +22,7 @@ class _ExtrahomeState extends State<Extrahome> {
   var zero = Image.asset("images/z.png");
   var p = "O";
   int a = 0;
-  var winner_list = [];
+  List<String> winner_list = [];
   void img(i) {
     if (lst[i] == '') {
       setState(() {
@@ -65,14 +66,14 @@ class _ExtrahomeState extends State<Extrahome> {
         winner = currentsign;
         winner_list.add(winner);
       });
-    } else
+    } /* else
       () {
         if (!lst.contains("")) {
           setState(() {
             winner = "draw";
           });
         }
-      };
+      }; */
     print(winner_list);
     print(winner);
   }
@@ -180,9 +181,7 @@ class _ExtrahomeState extends State<Extrahome> {
                             ? SvgPicture.asset('images/win.svg')
                             : winner == "X"
                                 ? SvgPicture.asset('images/win_p2.svg')
-                                : a == 1
-                                    ? SvgPicture.asset('images/Draw.svg')
-                                    : SvgPicture.asset('images/Draw.svg')),
+                                : Text("")),
                 ],
               ),
             ),
@@ -194,8 +193,10 @@ class _ExtrahomeState extends State<Extrahome> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => LeaderBoard()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => LeaderBoard(
+                                winnerRecords: winner_list,
+                              )));
                     },
                     child: SvgPicture.asset(
                       'images/Leader_board_button.svg',
